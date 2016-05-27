@@ -1,4 +1,4 @@
-Landscape-Client==13.07.3
+Landscape-Client
 PAM==0.4.2
 Twisted-Core==11.1.0
 apt-xapian-index==0.44
