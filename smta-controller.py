@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 """
 Created on Thu Mar 24 12:40:27 2016
 
@@ -26,7 +26,7 @@ def stop(idunivoco):
     
 def elabora(idunivoco):
     "crea file csv da stats"
-    if int(rlocal.setnx('status:',idunivoco)) == 1:
+    if int(rlocal.exists('stats:'+str(idunivoco))) == 1:
 	    out_file = open(idunivoco+'.csv',"w")
 	    idvidoteca =     str(rlocal.hget("stats:"+idunivoco,"idvideoteca"))
 	    qoeatt     =     str(rlocal.hget("stats:"+idunivoco,"qoeatt")[:5])
@@ -39,6 +39,7 @@ def elabora(idunivoco):
 	    out_file.write("idvideoteca;qoeatt;bufferings;errori;ttsmin;ttsmax;ttsavg;ttsstddev\n")
 	    out_file.write(idvidoteca+";"+qoeatt+";"+bufferings+";"+errori+";"+ttsmin+";"+ttsmax+";"+ttsavg+";"+ttsstddev+"\n")
 	    out_file.close()
+	    print "Dati elaborati per "+str(idunivoco)
     else:
    	print "dati non presenti per "+str(idunivoco)
 
