@@ -26,19 +26,21 @@ def stop(idunivoco):
     
 def elabora(idunivoco):
     "crea file csv da stats"
-    out_file = open(idunivoco+'.csv',"w")
-    idvidoteca =     str(rlocal.hget("stats:"+idunivoco,"idvideoteca"))
-    qoeatt     =     str(rlocal.hget("stats:"+idunivoco,"qoeatt")[:5])
-    bufferings =     str(rlocal.hget("stats:"+idunivoco,"buffering"))
-    errori     =     str(rlocal.hget("stats:"+idunivoco,"errori"))
-    ttsmin     =     str(rlocal.hget("stats:"+idunivoco,"min")[:5])
-    ttsmax     =     str(rlocal.hget("stats:"+idunivoco,"max")[:5])
-    ttsavg     =     str(rlocal.hget("stats:"+idunivoco,"avg")[:5])
-    ttsstddev  =     str(rlocal.hget("stats:"+idunivoco,"stddev")[:5])
-    out_file.write("idvideoteca;qoeatt;bufferings;errori;ttsmin;ttsmax;ttsavg;ttsstddev\n")
-    out_file.write(idvidoteca+";"+qoeatt+";"+bufferings+";"+errori+";"+ttsmin+";"+ttsmax+";"+ttsavg+";"+ttsstddev+"\n")
-    out_file.close()
-
+    if int(rlocal.setnx('status:',idunivoco)) == 1:
+	    out_file = open(idunivoco+'.csv',"w")
+	    idvidoteca =     str(rlocal.hget("stats:"+idunivoco,"idvideoteca"))
+	    qoeatt     =     str(rlocal.hget("stats:"+idunivoco,"qoeatt")[:5])
+	    bufferings =     str(rlocal.hget("stats:"+idunivoco,"buffering"))
+	    errori     =     str(rlocal.hget("stats:"+idunivoco,"errori"))
+	    ttsmin     =     str(rlocal.hget("stats:"+idunivoco,"min")[:5])
+	    ttsmax     =     str(rlocal.hget("stats:"+idunivoco,"max")[:5])
+	    ttsavg     =     str(rlocal.hget("stats:"+idunivoco,"avg")[:5])
+	    ttsstddev  =     str(rlocal.hget("stats:"+idunivoco,"stddev")[:5])
+	    out_file.write("idvideoteca;qoeatt;bufferings;errori;ttsmin;ttsmax;ttsavg;ttsstddev\n")
+	    out_file.write(idvidoteca+";"+qoeatt+";"+bufferings+";"+errori+";"+ttsmin+";"+ttsmax+";"+ttsavg+";"+ttsstddev+"\n")
+	    out_file.close()
+   else:
+   	print "dati non presenti per "+str(idunivoco)
 
 if len(sys.argv[:]) != 3:
 	print "sintassi: [start|stop|elabora] <idunivoco>"
