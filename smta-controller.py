@@ -39,7 +39,7 @@ def elabora(idunivoco):
 	    out_file.write("idvideoteca;qoeatt;bufferings;errori;ttsmin;ttsmax;ttsavg;ttsstddev\n")
 	    out_file.write(idvidoteca+";"+qoeatt+";"+bufferings+";"+errori+";"+ttsmin+";"+ttsmax+";"+ttsavg+";"+ttsstddev+"\n")
 	    out_file.close()
-   else:
+    else:
    	print "dati non presenti per "+str(idunivoco)
 
 if len(sys.argv[:]) != 3:
