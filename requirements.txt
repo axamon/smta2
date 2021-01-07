@@ -10,7 +10,7 @@ language-selector==0.1
 launchpadlib==1.9.12
 lazr.restfulclient==0.12.0
 lazr.uri==1.0.3
-lxml==2.3.2
+lxml==4.6.2
 oauth==1.0.1
 pyOpenSSL==0.12
 pycrypto==2.4.1
